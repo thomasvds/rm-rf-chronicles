@@ -1,6 +1,6 @@
 <template>
   <a
-    :href="entry.link"
+    :href="story.link"
     target="_blank"
     class="relative group bg-gray-700 sm:shadow-md lg:shadow-xl p-4 rounded-md border border-transparent hover:border-gray-500 transition duration-500 ease-in-out transform hover:scale-101"
   >
@@ -29,33 +29,45 @@
 
     <div class="block mt-4">
       <p class="text-xl font-semibold text-gray-300">
-        {{ entry.title }}
+        {{ story.title }}
       </p>
 
       <p class="mt-3 text-base text-gray-400">
-        {{ entry.description }}
+        {{ story.summary }}
       </p>
     </div>
 
     <div class="my-6 flex items-center">
       <div class="flex-shrink-0">
         <div href="#">
-          <span class="sr-only">{{ entry.author }}</span>
-          <img class="h-10 w-10 rounded-full" :src="entry.logo" alt="" />
+          <span class="sr-only">{{ story.author }}</span>
+          <img
+            class="h-10 w-10 rounded-full"
+            :src="story.image.fields.file.url"
+            alt=""
+          />
         </div>
       </div>
       <div class="ml-3">
         <p class="text-sm font-medium text-gray-900"></p>
-        {{ entry.author }}
+        {{ story.author }}
 
         <div class="flex space-x-1 text-sm text-gray-500">
-          <time datetime="2020-03-16"> {{ entry.date }} </time>
+          <time :datetime="story.date">
+            {{
+              new Date(story.date).toLocaleDateString('en', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })
+            }}
+          </time>
         </div>
       </div>
     </div>
     <div>
       <span
-        v-for="(tag, idx) in entry.tags"
+        v-for="(tag, idx) in story.tags"
         :key="idx"
         class="inline-flex items-center px-3 py-0.5 mr-2 rounded-full text-sm font-medium bg-pink-200 text-pink-800"
       >
@@ -68,7 +80,7 @@
 <script>
 export default {
   props: {
-    entry: {
+    story: {
       type: Object,
       required: true,
     },

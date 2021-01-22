@@ -1,5 +1,4 @@
 <template>
-  <!-- This example requires Tailwind CSS v2.0+ -->
   <div class="bg-gray-800 pt-10 pb-20 px-4 sm:px-6 lg:pt-16 lg:pb-28 lg:px-8">
     <div
       class="relative max-w-lg mx-auto divide-y-2 divide-gray-200 lg:max-w-7xl"
@@ -35,36 +34,28 @@
         </div>
       </form>
       <div class="mt-6 grid gap-y-5 gap-5 pt-12 lg:grid-cols-3 lg:gap-10">
-        <Entry v-for="(entry, idx) in entries" :key="idx" :entry="entry" />
+        <Story
+          v-for="(story, idx) in stories"
+          :key="idx"
+          :story="story.fields"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Entry from '@/components/entry'
+import Story from '@/components/story'
 
 export default {
   components: {
-    Entry,
+    Story,
   },
-  data: () => {
-    return {
-      entries: [
-        {
-          title: 'The case of the extra 40 ms',
-          description:
-            'A bug deep down in the plumbing of the Android Thread Scheduler causes Netflix videos stuttering on set-top-box.',
-          link:
-            'https://netflixtechblog.com/life-of-a-netflix-partner-engineer-the-case-of-extra-40-ms-b4c2dd278513',
-          logo:
-            'https://miro.medium.com/fit/c/96/96/1*BJWRqfSMf9Da9vsXG9EBRQ.jpeg',
-          author: 'Netflix',
-          date: 'Dec 11, 2020',
-          tags: ['Android', 'Smart TV', 'Audio'],
-        },
-      ],
-    }
+  props: {
+    stories: {
+      type: Array,
+      required: true,
+    },
   },
 }
 </script>
