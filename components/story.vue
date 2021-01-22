@@ -2,6 +2,7 @@
   <a
     :href="story.link"
     target="_blank"
+    rel="noopener"
     class="relative group bg-gray-700 sm:shadow-md lg:shadow-xl p-4 rounded-md border border-transparent hover:border-gray-500 transition duration-500 ease-in-out transform hover:scale-101"
   >
     <div
